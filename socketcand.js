@@ -250,7 +250,7 @@ function subscribe(sockId, id, sec, usec) {
 	}
 
 	if (state == Mode.BCM) {
-		const scc = getConnectionFromId(sockId);
+		scc = getConnectionFromId(sockId);
 		scc.write('< subscribe '+sec+' '+usec+' '+id+' >');
 	} else {
 		return new Error('ERROR cannot subscribe, wrong state');
@@ -291,10 +291,26 @@ function isotpConfig(sockId, txid, rxid, flags, blocksize, stmin, wftmax, txpad,
 	}
 
 	if (state == Mode.ISOTP) {
-		scc.write('< isotpconf '+txid+' '+rxid+' '+
-			flags+' '+blocksize+' '+stmin+' '+
-			wftmax+' '+txpad+' '+rxpad+' '+
-			extAddr+' '+rxExtAddr+' >');
+                var str = '< isotpconf '+txid+' '+rxid+' '+
+                        flags+' '+blocksize+' '+stmin;
+                if (wftmax != undefined) {
+                        str += ' '+wftmax;
+                }
+                if (txpad != undefined) {
+                        str += ' '+txpad;
+                }
+                if (rxpad != undefined) {
+                        str += ' '+rxpad;
+                }
+                if (extAddr != undefined) {
+                        str += ' '+extAddr;
+                }
+                if (rxExtAddr != undefined) {
+                        str += ' '+rxExtAddr;
+                }
+                str += ' >';
+
+		scc.write(str);
 	} else {
 		return new Error('ERROR cannot change isotp config, wrong state');
 	}
