@@ -1,6 +1,6 @@
 {
   "name": "socketcand-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A nodejs client for socketcand daemon",
   "main": "socketcand.js",
   "scripts": {
