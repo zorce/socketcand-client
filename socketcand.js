@@ -324,7 +324,6 @@ function sendPdu(sockId, data) {
 
 	if (state == Mode.ISOTP) {	
 		data = data.replace(/ /g,''); // remove whitespace
-		data = data.replace(/(.{2})/g,"$1 ") // insert whitespace every second
 		scc.write('< sendpdu '+data+' >');
 	} else {
 		return new Error('ERROR cannot send pdu, wrong state');
