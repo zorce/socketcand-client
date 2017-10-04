@@ -250,7 +250,6 @@ function subscribe(sockId, id, sec, usec) {
 	}
 
 	if (state == Mode.BCM) {
-		scc = getConnectionFromId(sockId);
 		scc.write('< subscribe '+sec+' '+usec+' '+id+' >');
 	} else {
 		return new Error('ERROR cannot subscribe, wrong state');
